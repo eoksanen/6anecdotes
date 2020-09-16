@@ -1,6 +1,6 @@
-const filterReducer = (state = 'is', action) => {
+const filterReducer = (state = '', action) => {
     switch (action.type) {
-      case 'SET_NOTIFICATION':
+      case 'SET_FILTER':
         return action.filter
       default:
         return state

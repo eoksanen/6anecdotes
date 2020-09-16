@@ -27,12 +27,15 @@ const Anecdotes = () => {
 
   const voteAnecdote = (anecdote) => {
     dispatch(voteOf(anecdote.id))
-    dispatch(NotificationChange('You voted ' + anecdote.content))
+    dispatch(NotificationChange(['notificationShow','YOU VOTED: ' + anecdote.content]))
   
   }
   const filteredAnecdotes =() => {
-    return (
-      anecdotes.filter(ad => {return ad.content.toLowerCase().includes(filter.toLowerCase())})
+
+ 
+    
+    return ( filter ? anecdotes.filter(ad => {return ad.content.toLowerCase().includes(filter.toLowerCase())})
+    : anecdotes 
     )
   }
 
@@ -40,7 +43,7 @@ const Anecdotes = () => {
       <div>
 
     {
-    filteredAnecdotes.sort(function(a, b){return b.votes-a.votes}).map(anecdote =>
+    filteredAnecdotes().sort(function(a, b){return b.votes-a.votes}).map(anecdote =>
 
         <Anecdote key={anecdote.id} anecdote={anecdote} handleClick= {() => voteAnecdote(anecdote)}/>
 

@@ -1,4 +1,4 @@
-const notificationReducer = (state = 'this is from notification reducer', action) => {
+const notificationReducer = (state = ['notificationHide', ''], action) => {
     switch (action.type) {
       case 'SET_NOTIFICATION':
         return action.notification

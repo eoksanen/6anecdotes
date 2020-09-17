@@ -21,14 +21,14 @@ const store = createStore(
   composeWithDevTools()
 )
 
-
+/*
 anecdoteService.getAll().then(anecdotes =>
    {
     console.log('BACK',anecdotes)
     store.dispatch(initializeAnecdotes(anecdotes))
   }
 )
-
+*/
 
 
 export default store

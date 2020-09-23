@@ -11,20 +11,31 @@ const notificationReducer = (state = ['', ''], action) => {
   }
 }
 
-
+let timeID
 
 export const setNotification = (notification, delay) => {
-  return async dispatch => {
-    dispatch({
-      type: 'SET_NOTIFICATION',
-      notification,
-    })
-    console.log('NOT ',notification)
-    await new Promise(res => setTimeout(res, delay * 1000));
-    console.log('Waited ',delay * 1000 + ' second')
-    dispatch({
-    type: 'CLEAR_NOTIFICATION',
-  })
+
+  function delayFunction(res) {
+
+      console.log('OLD ',timeID)
+    if (typeof timeID === 'number') {
+      clearTimeout(timeID);
+    }
+    timeID = setTimeout(res, delay * 1000);
+    console.log('NEW ',timeID)
+  }
+
+    return async dispatch => {
+      dispatch({
+        type: 'SET_NOTIFICATION',
+        notification,
+      })
+      console.log('NOT ',notification)
+      await new Promise(res => delayFunction(res));
+      console.log('Waited ',delay * 1000 + ' second')
+      dispatch({
+      type: 'CLEAR_NOTIFICATION',
+    })  
   }
 }
 

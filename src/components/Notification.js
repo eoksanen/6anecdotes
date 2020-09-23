@@ -1,18 +1,26 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { ClearNotification } from '../reducers/notificationReducer'
+import { connect } from 'react-redux'
+//import { useDispatch, useSelector } from 'react-redux'
+//import { ClearNotification } from '../reducers/notificationReducer'
 
 
-const Notification = () => {
-  const notification = useSelector(state => state.notification)
-  console.log('notification ',notification)
+const Notification = (props) => {
+  //const notification = useSelector(state => state.notification)
+  console.log('notification ',props.notification)
 
 
   return (
     <div className = 'notificationShow'>
-      {notification}
+      {props.notification}
     </div>
   )
 }
 
-export default Notification
+const mapStateToProps = (state) => {
+  return {
+    notification: state.notification,
+  }
+}
+
+const ConnectedNotification = connect(mapStateToProps)(Notification)
+export default ConnectedNotification

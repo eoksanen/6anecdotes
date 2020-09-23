@@ -3,7 +3,8 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { voteOf } from '../reducers/anecdoteReducer'
-import { NotificationChange } from '../reducers/notificationReducer'
+import { ClearNotification } from '../reducers/notificationReducer'
+import { setNotification } from '../reducers/notificationReducer'
 
 const Anecdote = ({ anecdote, handleClick }) => {
   return(
@@ -27,8 +28,8 @@ const Anecdotes = () => {
 
   const voteAnecdote = (anecdote) => {
     dispatch(voteOf(anecdote))
-    dispatch(NotificationChange(['notificationShow','YOU VOTED: ' + anecdote.content]))
-  
+    dispatch(setNotification(`you voted '${anecdote.content}'`, 10))
+
   }
   const filteredAnecdotes =() => {
 

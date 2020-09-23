@@ -1,17 +1,46 @@
-const notificationReducer = (state = ['notificationHide', ''], action) => {
-    switch (action.type) {
-      case 'SET_NOTIFICATION':
-        return action.notification
-      default:
-        return state
-    }
+const notificationReducer = (state = ['', ''], action) => {
+  switch (action.type) {
+    case 'SET_NOTIFICATION':
+      console.log('SET_NOTIFICATION')
+      return action.notification
+    case 'CLEAR_NOTIFICATION':
+        console.log('CLEAR_NOTIFICATION')
+        return ['',null]
+    default:
+      return state
   }
-  
-  export const NotificationChange = (notification) => {
-    return {
+}
+
+
+
+export const setNotification = (notification, delay) => {
+  return async dispatch => {
+    dispatch({
       type: 'SET_NOTIFICATION',
       notification,
-    }
+    })
+    console.log('NOT ',notification)
+    await new Promise(res => setTimeout(res, delay * 1000));
+    console.log('Waited ',delay * 1000 + ' second')
+    dispatch({
+    type: 'CLEAR_NOTIFICATION',
+  })
   }
+}
+
+
+    export const ClearNotification = () => {
+      const empty = []
+      console.log('Clear ')
+      return async dispatch => {
+        await new Promise(res => setTimeout(res, (3000)));
+        console.log('Waited ',' second')
+        dispatch({
+        type: 'CLEAR_NOTIFICATION',
+        empty,
+      })
+      }
+    }
   
   export default notificationReducer
+  
